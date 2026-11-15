@@ -1,62 +1,30 @@
-# OpenAI_Chatbot_Integration_With_Slack
-This project is a Slack bot designed to generate answer based on user input. It utilizes the OpenAI API for natural language processing and conversation generation.
+# Slack AI Assistant – LangChain + OpenAI
+
+A Slack bot that answers messages and @mentions with an OpenAI model through LangChain. It runs over **Slack Socket Mode**, so no public server or webhook URL is needed.
 
 ## Features
 
-- Generates job proposals based on provided job descriptions.
-- Handles irrelevant messages by prompting users to provide proper information.
-- Ensures that the generated proposals contain only relevant project details.
-- Outputs information in a simple and easy-to-understand format.
-- Utilizes natural language processing to generate human-like responses.
+- Replies to direct messages and `@bot` mentions in channels
+- LangChain prompt template plus OpenAI chat model for responses
+- Socket Mode connection (`slack_bolt`), so it runs on a laptop or a private server
+- Secrets loaded from `.env`, never hard-coded
 
-## Dependencies
+## Setup
 
-- Python 3.7+
-- Slack Bolt
-- Slack Bolt Socket Mode Adapter
-- Langchain
-- Langchain OpenAI
-- dotenv
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your_username/your_repo.git   ```
-
-## Install dependencies:
-
-   ```bash
-pip install -r requirements.txt
- ```
-
-Create a .env file in the root directory and add your Slack bot token:
-- env
-- Copy code
-- SLACK_BOT_TOKEN=your_slack_bot_token
-- 
-## Usage
-- Run the Slack bot application:
+1. Create a Slack app at [api.slack.com/apps](https://api.slack.com/apps):
+   - Turn on **Socket Mode** and create an **App-Level Token** (`xapp-…`)
+   - Add bot scopes: `app_mentions:read`, `chat:write`, `im:history`
+   - Subscribe to the `message.im` and `app_mention` events, then install the app to get the **Bot Token** (`xoxb-…`)
+2. Run:
 
 ```bash
-python app.py
+git clone https://github.com/Fahad-Ali-Data-Scientist/slack-ai-assistant-langchain.git
+cd slack-ai-assistant-langchain
+pip install -r requirements.txt
+cp .env.example .env     # add SLACK_BOT_TOKEN, SLACK_APP_TOKEN, OPENAI_API_KEY
+python complete.py
 ```
-Interact with the bot in your Slack workspace by mentioning its name and providing job descriptions.
 
-## Configuration
+## Tech stack
 
-Modify the prompt_template1 variable in app.py to customize the job proposal template according to your requirements.
-Adjust the temperature and model_name parameters in the ChatOpenAI initialization to fine-tune the natural language processing model.
-Contributing
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-
-
-
-
-
+Python · Slack Bolt (Socket Mode) · LangChain · OpenAI API · python-dotenv
